@@ -120,6 +120,8 @@ EmulateInstructionMIPS64::EmulateInstructionMIPS64 (const lldb_private::ArchSpec
         case ArchSpec::eCore_mips64r6:
         case ArchSpec::eCore_mips64r6el:
             cpu = "mips64r6"; break;
+        case ArchSpec::eCore_cheri:
+            cpu = "cheri"; break;   /* XXX */
         default:
             cpu = "generic"; break;
     }

@@ -196,6 +196,7 @@ ELFHeader::GetRelocationJumpSlotType() const
         slot = R_AARCH64_JUMP_SLOT;
         break;
     case EM_MIPS:
+    case 0xc256:  // CHERI 256
         slot = R_MIPS_JUMP_SLOT;
         break;
     }
