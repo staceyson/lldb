@@ -283,19 +283,30 @@ kalimbaVariantFromElfFlags(const elf::elf_word e_flags)
 }
 
 static uint32_t
-mipsVariantFromElfFlags(const elf::elf_word e_flags, uint32_t endian)
+mipsVariantFromElfFlags(const elf::elf_word e_flags, uint32_t endian, uint32_t ei_class)
 {
     const uint32_t mips_arch = e_flags & llvm::ELF::EF_MIPS_ARCH;
     uint32_t arch_variant = ArchSpec::eMIPSSubType_unknown;
 
     switch (mips_arch)
     {
+        case llvm::ELF::EF_MIPS_ARCH_1:
+            /* FreeBSD sets the e_flags field to 0 (EF_MIPS_ARCH_1) in core files.  Check the ei_class. */
+            if (ei_class == llvm::ELF::ELFCLASS64)
+                return (endian == ELFDATA2LSB) ? ArchSpec::eMIPSSubType_mips64el : ArchSpec::eMIPSSubType_mips64;
+        case llvm::ELF::EF_MIPS_ARCH_2:
         case llvm::ELF::EF_MIPS_ARCH_32:
             return (endian == ELFDATA2LSB) ? ArchSpec::eMIPSSubType_mips32el : ArchSpec::eMIPSSubType_mips32;
         case llvm::ELF::EF_MIPS_ARCH_32R2:
             return (endian == ELFDATA2LSB) ? ArchSpec::eMIPSSubType_mips32r2el : ArchSpec::eMIPSSubType_mips32r2;
         case llvm::ELF::EF_MIPS_ARCH_32R6:
             return (endian == ELFDATA2LSB) ? ArchSpec::eMIPSSubType_mips32r6el : ArchSpec::eMIPSSubType_mips32r6;
+        case llvm::ELF::EF_MIPS_ARCH_3:
+        case llvm::ELF::EF_MIPS_ARCH_4:
+            /* MIPS III and IV can be 32 or 64. */
+            if (ei_class == llvm::ELF::ELFCLASS32)
+                return (endian == ELFDATA2LSB) ? ArchSpec::eMIPSSubType_mips32el : ArchSpec::eMIPSSubType_mips32;
+        case llvm::ELF::EF_MIPS_ARCH_5:
         case llvm::ELF::EF_MIPS_ARCH_64:
             return (endian == ELFDATA2LSB) ? ArchSpec::eMIPSSubType_mips64el : ArchSpec::eMIPSSubType_mips64;
         case llvm::ELF::EF_MIPS_ARCH_64R2:
@@ -314,7 +325,7 @@ subTypeFromElfHeader(const elf::ELFHeader& header)
 {
     if (header.e_machine == llvm::ELF::EM_MIPS)
         return mipsVariantFromElfFlags (header.e_flags,
-            header.e_ident[EI_DATA]);
+            header.e_ident[EI_DATA], header.e_ident[EI_CLASS]);
 
     return
         llvm::ELF::EM_CSR_KALIMBA == header.e_machine ?
