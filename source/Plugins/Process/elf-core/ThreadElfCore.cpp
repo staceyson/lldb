@@ -115,6 +115,7 @@ ThreadElfCore::CreateRegisterContextForFrame (StackFrame *frame)
                     case llvm::Triple::ppc64:
                         reg_interface = new RegisterContextFreeBSD_powerpc64(arch);
                         break;
+                    case llvm::Triple::cheri:
                     case llvm::Triple::mips64:
                         reg_interface = new RegisterContextFreeBSD_mips64(arch);
                         break;
@@ -168,6 +169,7 @@ ThreadElfCore::CreateRegisterContextForFrame (StackFrame *frame)
             case llvm::Triple::arm:
                 m_thread_reg_ctx_sp.reset(new RegisterContextCorePOSIX_arm (*this, reg_interface, m_gpregset_data, m_fpregset_data));
                 break;
+            case llvm::Triple::cheri:
             case llvm::Triple::mips64:
                 m_thread_reg_ctx_sp.reset(new RegisterContextCorePOSIX_mips64 (*this, reg_interface, m_gpregset_data, m_fpregset_data, m_capregset_data));
                 break;

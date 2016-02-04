@@ -47,6 +47,7 @@ public:
         eMIPSSubType_mips64el,
         eMIPSSubType_mips64r2el,
         eMIPSSubType_mips64r6el,
+        eMIPSSubType_cheri,
     };
 
     // Masks for the ases word of an ABI flags structure.
@@ -122,6 +123,7 @@ public:
         eCore_mips64r3el,
         eCore_mips64r5el,
         eCore_mips64r6el,
+        eCore_cheri,
 
         eCore_ppc_generic,
         eCore_ppc_ppc601,
