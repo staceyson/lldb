@@ -397,6 +397,7 @@ enum {
     NT_PRPSINFO,
     NT_THRMISC       = 7,
     NT_PROCSTAT_AUXV = 16,
+    NT_CAPREGSET     = 20,
     NT_PPC_VMX       = 0x100
 };
 
@@ -448,10 +449,11 @@ ParseFreeBSDThrMisc(ThreadData &thread_data, DataExtractor &data)
 /// 1) A PT_NOTE segment is composed of one or more NOTE entries.
 /// 2) NOTE Entry contains a standard header followed by variable size data.
 ///   (see ELFNote structure)
-/// 3) A Thread Context in a core file usually described by 3 NOTE entries.
+/// 3) A Thread Context in a core file usually described by 4 NOTE entries.
 ///    a) NT_PRSTATUS - Register context
 ///    b) NT_PRPSINFO - Process info(pid..)
 ///    c) NT_FPREGSET - Floating point registers
+///    d) NT_CAPREGSET- Capability registers
 /// 4) The NOTE entries can be in any order
 /// 5) If a core file contains multiple thread contexts then there is two data forms
 ///    a) Each thread context(2 or more NOTE entries) contained in its own segment (PT_NOTE)
@@ -513,6 +515,9 @@ ProcessElfCore::ParseThreadContextsFromNoteSegment(const elf::ELFProgramHeader *
                     break;
                 case FREEBSD::NT_FPREGSET:
                     thread_data->fpregset = note_data;
+                    break;
+                case FREEBSD::NT_CAPREGSET:
+                    thread_data->capregset = note_data;
                     break;
                 case FREEBSD::NT_PRPSINFO:
                     have_prpsinfo = true;

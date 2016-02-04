@@ -20,7 +20,8 @@ public:
     RegisterContextCorePOSIX_mips64 (lldb_private::Thread &thread,
                                      lldb_private::RegisterInfoInterface *register_info,
                                      const lldb_private::DataExtractor &gpregset,
-                                     const lldb_private::DataExtractor &fpregset);
+                                     const lldb_private::DataExtractor &fpregset,
+                                     const lldb_private::DataExtractor &capregset);
 
     ~RegisterContextCorePOSIX_mips64();
 
@@ -55,6 +56,9 @@ protected:
 private:
     lldb::DataBufferSP m_gpr_buffer;
     lldb_private::DataExtractor m_gpr;
+
+    lldb::DataBufferSP m_cr_buffer;
+    lldb_private::DataExtractor m_cr;
 };
 
 #endif // #ifndef liblldb_RegisterContextCorePOSIX_mips64_H_

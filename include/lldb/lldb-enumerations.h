@@ -154,6 +154,7 @@ namespace lldb {
         eFormatAddressInfo,         // Describe what an address points to (func + offset with file/line, symbol + offset, data, etc)
         eFormatHexFloat,            // ISO C99 hex float string
         eFormatInstruction,         // Disassemble an opcode
+        eFormatCapability,
         eFormatVoid,                // Do not print this
         kNumFormats
     };
