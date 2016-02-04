@@ -118,7 +118,7 @@ g_register_infos_mips64[] =
     DEFINE_GPR(ic,       NULL,  gcc_dwarf_ic_mips64,    gcc_dwarf_ic_mips64,    LLDB_INVALID_REGNUM,    LLDB_INVALID_REGNUM),
     DEFINE_GPR(dummy,    NULL,  gcc_dwarf_dummy_mips64, gcc_dwarf_dummy_mips64, LLDB_INVALID_REGNUM,    LLDB_INVALID_REGNUM),
     DEFINE_SYN64(pc,     NULL,  LLDB_INVALID_REGNUM,    LLDB_INVALID_REGNUM,    LLDB_REGNUM_GENERIC_PC, LLDB_INVALID_REGNUM), // Synthetic PC
-    DEFINE_CR( c0,  0, NULL),
+    DEFINE_CR( c0,  0, "ddc"),
     DEFINE_CR( c1,  1, NULL),
     DEFINE_CR( c2,  2, NULL),
     DEFINE_CR( c3,  3, NULL),

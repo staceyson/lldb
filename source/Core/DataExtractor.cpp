@@ -2035,30 +2035,23 @@ DataExtractor::Dump (Stream *s,
             {
                 assert (item_bit_size == 0 && item_bit_offset == 0);
                 uint64_t v;
-                s->PutCString("{ ");
+                uint32_t otype, perms, sealed;
+                uint64_t cursor, base, length;
 
                 offset = 0;
-                v = GetU32(&offset);
-                s->Printf("reserved=0x%08" PRIx64 " ", v);
-
-                offset = 4;
-                v = GetU32(&offset);
-                s->Printf("u=%d ", v & 0x80000000 ? 1 : 0);
-                s->Printf("perms=0x%08" PRIx64 " ", v & 0x7fffffff);
-
+                v = GetU64(&offset);
+                sealed = (uint32_t)(v & 1);
+                perms = (uint32_t)(v >> 1) & 0x7fffffff;
+                otype = (uint32_t)(v >> 32) & 0x00ffffff;
                 offset = 8;
-                v = GetU64(&offset);
-                s->Printf("otype=0x%016" PRIx64 " ", v);
-
+                cursor = GetU64(&offset);
                 offset = 16;
-                v = GetU64(&offset);
-                s->Printf("base=0x%016" PRIx64 " ", v);
-
+                base = GetU64(&offset);
                 offset = 24;
-                v = GetU64(&offset);
-                s->Printf("length=0x%016" PRIx64 " ", v);
+                length = GetU64(&offset);
 
-                s->PutChar('}');
+                s->Printf("{ s:%u p:%08x b:%016jx l:%016jx o:%jx t:%x }",
+                        sealed, perms, base, length, (cursor - base), otype);
             }
         }
     }
