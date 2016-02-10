@@ -30,6 +30,7 @@ FreeBSDSignals::Reset()
     //        ======  ============   ==========  ======== ====== ====== ===================================================
     AddSignal (32,    "SIGTHR",      "THR",      false,   true , true , "thread interrupt");
     AddSignal (33,    "SIGLIBRT",    "LIBRT",    false,   true , true , "reserved by real-time library");
+    AddSignal (34,    "SIGPROT",     "PROT",     false,   true , true , "memory capability exception");
     AddSignal (65,    "SIGRTMIN",    "RTMIN",    false,   true , true , "real time signal 0");
     AddSignal (66,    "SIGRTMIN+1",  "RTMIN+1",  false,   true , true , "real time signal 1");
     AddSignal (67,    "SIGRTMIN+2",  "RTMIN+2",  false,   true , true , "real time signal 2");
