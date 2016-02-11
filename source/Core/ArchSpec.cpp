@@ -303,7 +303,7 @@ static const ArchDefinitionEntry g_elf_arch_entries[] =
     { ArchSpec::eCore_mips64el        , llvm::ELF::EM_MIPS   , ArchSpec::eMIPSSubType_mips64el,   0xFFFFFFFFu, 0xFFFFFFFFu }, // mips64el
     { ArchSpec::eCore_mips64r2el      , llvm::ELF::EM_MIPS   , ArchSpec::eMIPSSubType_mips64r2el, 0xFFFFFFFFu, 0xFFFFFFFFu }, // mips64r2el
     { ArchSpec::eCore_mips64r6el      , llvm::ELF::EM_MIPS   , ArchSpec::eMIPSSubType_mips64r6el, 0xFFFFFFFFu, 0xFFFFFFFFu }, // mips64r6el
-     { ArchSpec::eCore_mips64         , 0xc256               , ArchSpec::eMIPSSubType_mips64,      0xFFFFFFFFu, 0xFFFFFFFFu }, // CHERI 256-bit
+     { ArchSpec::eCore_cheri          , 0xc256               , ArchSpec::eMIPSSubType_cheri,      0xFFFFFFFFu, 0xFFFFFFFFu }, // CHERI 256-bit
     { ArchSpec::eCore_hexagon_generic , llvm::ELF::EM_HEXAGON, LLDB_INVALID_CPUTYPE, 0xFFFFFFFFu, 0xFFFFFFFFu }, // HEXAGON
     { ArchSpec::eCore_kalimba3 ,        llvm::ELF::EM_CSR_KALIMBA, llvm::Triple::KalimbaSubArch_v3, 0xFFFFFFFFu, 0xFFFFFFFFu },  // KALIMBA
     { ArchSpec::eCore_kalimba4 ,        llvm::ELF::EM_CSR_KALIMBA, llvm::Triple::KalimbaSubArch_v4, 0xFFFFFFFFu, 0xFFFFFFFFu },  // KALIMBA
@@ -1208,6 +1208,7 @@ cores_match (const ArchSpec::Core core1, const ArchSpec::Core core2, bool try_in
         }
 
     case ArchSpec::eCore_mips64:
+    case ArchSpec::eCore_cheri:
         if (!enforce_exact_match)
         {
             if (core2 >= ArchSpec::kCore_mips32_first && core2 <= ArchSpec::kCore_mips32_last)

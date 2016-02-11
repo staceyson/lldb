@@ -324,8 +324,7 @@ static uint32_t
 subTypeFromElfHeader(const elf::ELFHeader& header)
 {
     if (header.e_machine == 0xc256) // CheriABI 256-bit
-        // return ArchSpec::eMIPSSubType_cheri;
-        return ArchSpec::eMIPSSubType_mips64;
+        return ArchSpec::eMIPSSubType_cheri;
     if (header.e_machine == llvm::ELF::EM_MIPS)
         return mipsVariantFromElfFlags (header.e_flags,
             header.e_ident[EI_DATA], header.e_ident[EI_CLASS]);

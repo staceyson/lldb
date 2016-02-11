@@ -207,7 +207,7 @@ public:
         kCore_mips32el_last   = eCore_mips32r6el,
 
         kCore_mips64_first  = eCore_mips64,
-        kCore_mips64_last   = eCore_mips64r6,
+        kCore_mips64_last   = eCore_cheri,
 
         kCore_mips64el_first  = eCore_mips64el,
         kCore_mips64el_last   = eCore_mips64r6el
