@@ -25,6 +25,7 @@
 #include "lldb/Initialization/SystemInitializerCommon.h"
 #include "lldb/Interpreter/CommandInterpreter.h"
 
+#include "Plugins/ABI/CheriBSD-mips64/ABICheri_mips64.h"
 #include "Plugins/ABI/MacOSX-i386/ABIMacOSX_i386.h"
 #include "Plugins/ABI/MacOSX-arm/ABIMacOSX_arm.h"
 #include "Plugins/ABI/MacOSX-arm64/ABIMacOSX_arm64.h"
@@ -251,6 +252,7 @@ SystemInitializerFull::Initialize()
     llvm::InitializeAllTargetMCs();
     llvm::InitializeAllDisassemblers();
 
+    ABICheri_mips64::Initialize();
     ABIMacOSX_i386::Initialize();
     ABIMacOSX_arm::Initialize();
     ABIMacOSX_arm64::Initialize();

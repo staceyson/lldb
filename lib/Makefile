@@ -32,6 +32,7 @@ USEDLIBS = lldbAPI.a \
 	lldbHost.a \
 	lldbBase.a \
 	lldbInterpreter.a \
+	lldbPluginABICheri_mips64.a \
 	lldbPluginABIMacOSX_arm.a \
 	lldbPluginABIMacOSX_arm64.a \
 	lldbPluginABIMacOSX_i386.a \

@@ -48,6 +48,7 @@ set( LLDB_USED_LIBS
   lldbPluginAppleObjCRuntime
   lldbPluginRenderScriptRuntime
   lldbPluginCXXItaniumABI
+  lldbPluginABICheri_mips64
   lldbPluginABIMacOSX_arm
   lldbPluginABIMacOSX_arm64
   lldbPluginABIMacOSX_i386

@@ -1,3 +1,4 @@
+add_subdirectory(CheriBSD-mips64)
 add_subdirectory(SysV-arm)
 add_subdirectory(SysV-arm64)
 add_subdirectory(SysV-hexagon)
