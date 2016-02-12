@@ -103,6 +103,7 @@ uint32_t g_cr_regnums[] =
     cap_c25_mips64,
     cap_c26_mips64,
     cap_pcc_mips64,
+    cap_cause_mips64,
 };
 
 

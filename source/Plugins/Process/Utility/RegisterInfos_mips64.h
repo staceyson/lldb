@@ -72,6 +72,11 @@
       { LLDB_INVALID_REGNUM, LLDB_INVALID_REGNUM, LLDB_INVALID_REGNUM,        \
         LLDB_INVALID_REGNUM, cap_##reg##_mips64 }, NULL, NULL }
 
+#define DEFINE_CC(reg, i, alt)                                                \
+{ #reg, alt, 8, i * 32, eEncodingUint, eFormatHex,                             \
+      { LLDB_INVALID_REGNUM, LLDB_INVALID_REGNUM, LLDB_INVALID_REGNUM,        \
+        LLDB_INVALID_REGNUM, cap_##reg##_mips64 }, NULL, NULL }
+
 static RegisterInfo
 g_register_infos_mips64[] =
 {
@@ -118,34 +123,35 @@ g_register_infos_mips64[] =
     DEFINE_GPR(ic,       NULL,  gcc_dwarf_ic_mips64,    gcc_dwarf_ic_mips64,    LLDB_INVALID_REGNUM,    LLDB_INVALID_REGNUM),
     DEFINE_GPR(dummy,    NULL,  gcc_dwarf_dummy_mips64, gcc_dwarf_dummy_mips64, LLDB_INVALID_REGNUM,    LLDB_INVALID_REGNUM),
     DEFINE_SYN64(pc,     NULL,  LLDB_INVALID_REGNUM,    LLDB_INVALID_REGNUM,    LLDB_REGNUM_GENERIC_PC, LLDB_INVALID_REGNUM), // Synthetic PC
-    DEFINE_CR( c0,  0, "ddc"),
-    DEFINE_CR( c1,  1, NULL),
-    DEFINE_CR( c2,  2, NULL),
-    DEFINE_CR( c3,  3, NULL),
-    DEFINE_CR( c4,  4, NULL),
-    DEFINE_CR( c5,  5, NULL),
-    DEFINE_CR( c6,  6, NULL),
-    DEFINE_CR( c7,  7, NULL),
-    DEFINE_CR( c8,  8, NULL),
-    DEFINE_CR( c9,  9, NULL),
-    DEFINE_CR(c10, 10, NULL),
-    DEFINE_CR(c11, 11, NULL),
-    DEFINE_CR(c12, 12, NULL),
-    DEFINE_CR(c13, 13, NULL),
-    DEFINE_CR(c14, 14, NULL),
-    DEFINE_CR(c15, 15, NULL),
-    DEFINE_CR(c16, 16, NULL),
-    DEFINE_CR(c17, 17, NULL),
-    DEFINE_CR(c18, 18, NULL),
-    DEFINE_CR(c19, 19, NULL),
-    DEFINE_CR(c20, 20, NULL),
-    DEFINE_CR(c21, 21, NULL),
-    DEFINE_CR(c22, 22, NULL),
-    DEFINE_CR(c23, 23, NULL),
-    DEFINE_CR(c24, 24, "rcc"),
-    DEFINE_CR(c25, 25, NULL),
-    DEFINE_CR(c26, 26, "idc"),
-    DEFINE_CR(pcc, 27, NULL),
+    DEFINE_CR( c0,     0, "ddc"),
+    DEFINE_CR( c1,     1, NULL),
+    DEFINE_CR( c2,     2, NULL),
+    DEFINE_CR( c3,     3, NULL),
+    DEFINE_CR( c4,     4, NULL),
+    DEFINE_CR( c5,     5, NULL),
+    DEFINE_CR( c6,     6, NULL),
+    DEFINE_CR( c7,     7, NULL),
+    DEFINE_CR( c8,     8, NULL),
+    DEFINE_CR( c9,     9, NULL),
+    DEFINE_CR(c10,    10, NULL),
+    DEFINE_CR(c11,    11, NULL),
+    DEFINE_CR(c12,    12, NULL),
+    DEFINE_CR(c13,    13, NULL),
+    DEFINE_CR(c14,    14, NULL),
+    DEFINE_CR(c15,    15, NULL),
+    DEFINE_CR(c16,    16, NULL),
+    DEFINE_CR(c17,    17, NULL),
+    DEFINE_CR(c18,    18, NULL),
+    DEFINE_CR(c19,    19, NULL),
+    DEFINE_CR(c20,    20, NULL),
+    DEFINE_CR(c21,    21, NULL),
+    DEFINE_CR(c22,    22, NULL),
+    DEFINE_CR(c23,    23, NULL),
+    DEFINE_CR(c24,    24, "rcc"),
+    DEFINE_CR(c25,    25, NULL),
+    DEFINE_CR(c26,    26, "idc"),
+    DEFINE_CR(pcc,    27, NULL),
+    DEFINE_CC(cause,  28, "ccause"),
 #else
 
     DEFINE_GPR(zero,     "r0",  gcc_dwarf_zero_mips64,  gcc_dwarf_zero_mips64,  LLDB_INVALID_REGNUM,    gdb_zero_mips64),

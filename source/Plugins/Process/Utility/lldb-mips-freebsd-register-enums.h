@@ -95,7 +95,8 @@ namespace lldb_private
         cap_c25_mips64,
         cap_c26_mips64,
         cap_pcc_mips64,
-        k_last_cr_mips64 = cap_pcc_mips64,
+        cap_cause_mips64,
+        k_last_cr_mips64 = cap_cause_mips64,
 
         k_num_registers_mips64,
         k_num_gpr_registers_mips64 = k_last_gpr_mips64 - k_first_gpr_mips64 + 1,

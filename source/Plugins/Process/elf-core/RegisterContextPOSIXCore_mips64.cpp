@@ -105,6 +105,13 @@ RegisterContextCorePOSIX_mips64::ReadRegister(const RegisterInfo *reg_info, Regi
             return true;
         }
     }
+    if (reg == cap_cause_mips64)
+    {
+        uint64_t v = m_cr.GetMaxU64(&offset, reg_info->byte_size);
+
+        value = v;
+        return true;
+    }
     else
     {
         uint8_t buf[32];
