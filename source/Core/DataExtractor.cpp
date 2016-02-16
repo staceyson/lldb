@@ -2035,11 +2035,12 @@ DataExtractor::Dump (Stream *s,
             {
                 assert (item_bit_size == 0 && item_bit_offset == 0);
                 uint64_t v;
-                uint32_t otype, perms, sealed;
+                uint32_t otype, perms, sealed, tag;
                 uint64_t cursor, base, length;
 
                 offset = 0;
                 v = GetU64(&offset);
+                tag = (uint32_t)(v >> 63);
                 sealed = (uint32_t)(v & 1);
                 perms = (uint32_t)(v >> 1) & 0x7fffffff;
                 otype = (uint32_t)(v >> 32) & 0x00ffffff;
@@ -2050,8 +2051,8 @@ DataExtractor::Dump (Stream *s,
                 offset = 24;
                 length = GetU64(&offset);
 
-                s->Printf("{ s:%u p:%08x b:%016jx l:%016jx o:%jx t:%x }",
-                        sealed, perms, base, length, (cursor - base), otype);
+                s->Printf("{ v:%u s:%u p:%08x b:%016jx l:%016jx o:%jx t:%x }",
+                        tag, sealed, perms, base, length, (cursor - base), otype);
             }
         }
     }
